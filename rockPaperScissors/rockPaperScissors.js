@@ -30,36 +30,22 @@
 // rockPaperScissors(3) = 3^3 = 27
 // rockPaperScissors(4) = 3^4 = 81
 
-var rockPaperScissors = function (number) {
-  // pseudocode
-  // create an container to hold the arrays
-  var everyInstance = [];
-  // create another array holding R, P, S
-  var instance = ['R', 'P', 'S'];
-  // create a for loop to iterate through and grab each letter at each index to add to an array
-  var preInstance = '';
-  // I NEED TO CREATE A RECURSIVE FUNCTION HERE ???
-  // var repeat = function(instance, number)
-  for (var i = 0; i < instance.length; i++) {
-    var current = instance[i];
-    preInstance += current;
-    // if the container array's length is less than input
-  }
-  if (preInstance.length < number) {
-    // call the function variable again with the same number as the input
-    // repeat(instance, number)
-    rockPaperScissors(number);
-  } else {
-    everyInstance.push(preInstance);
-  }
+var rockPaperScissors = function (num) {
 
-  if (everyInstance.length < Math.pow(3,number)) {
-    // repeat(instance, number);
-    rockPaperScissors(number);
+  var choices = ['R', 'P', 'S'];
+
+  var allCombos = [];
+
+  function repeat (num, string) {
+    if (num === 0) {
+      allCombos.push(string);
+    } else {
+      for (var i = 0; i < choices.length; i++) {
+        repeat(num - 1, string + choices[i]);
+      }
+    }
   }
-  // i need to call a recursive function after this if statement to bring me back to line 42
-  // if indexOf presinstance is already inside everyInstance, increment the index
-  return everyInstance;
+  repeat(num, '');
+  return allCombos;
+
 };
-
-
