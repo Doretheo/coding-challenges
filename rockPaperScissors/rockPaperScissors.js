@@ -39,6 +39,7 @@ var rockPaperScissors = function (number) {
   // create a for loop to iterate through and grab each letter at each index to add to an array
   var preInstance = '';
   // I NEED TO CREATE A RECURSIVE FUNCTION HERE ???
+  // var repeat = function(instance, number)
   for (var i = 0; i < instance.length; i++) {
     var current = instance[i];
     preInstance += current;
@@ -46,12 +47,14 @@ var rockPaperScissors = function (number) {
   }
   if (preInstance.length < number) {
     // call the function variable again with the same number as the input
+    // repeat(instance, number)
     rockPaperScissors(number);
   } else {
     everyInstance.push(preInstance);
   }
 
   if (everyInstance.length < Math.pow(3,number)) {
+    // repeat(instance, number);
     rockPaperScissors(number);
   }
   // i need to call a recursive function after this if statement to bring me back to line 42
