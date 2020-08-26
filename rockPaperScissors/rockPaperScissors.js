@@ -32,20 +32,25 @@
 
 var rockPaperScissors = function (num) {
 
-  var choices = ['R', 'P', 'S'];
+  var instances = ['R', 'P', 'S'];
+  var allInstances = [];
 
-  var allCombos = [];
+  if (num === 0) {
+    return allInstances;
+  }
 
-  function repeat (num, string) {
-    if (num === 0) {
-      allCombos.push(string);
-    } else {
-      for (var i = 0; i < choices.length; i++) {
-        repeat(num - 1, string + choices[i]);
-      }
+  if (num === 1) {
+    return instances;
+  }
+
+  var otherInstances = rockPaperScissors(num - 1);
+
+  for (var i = 0; i < instances.length; i++) {
+    var firstChar = instances[i];
+    for (var j = 0; j < otherInstances.length; j++) {
+      var secondChar = otherInstances[j];
+      allInstances.push(firstChar + secondChar);
     }
   }
-  repeat(num, '');
-  return allCombos;
-
+  return allInstances;
 };
