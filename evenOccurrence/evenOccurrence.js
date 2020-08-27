@@ -28,7 +28,8 @@ var evenOccurrence = (arr)  => {
 
   for (var numKey in objectCounter) {
     if (objectCounter[numKey] % 2 === 0) {
-      return numKey;
+      return parseInt(numKey);
     }
   };
+  return null;
 };
