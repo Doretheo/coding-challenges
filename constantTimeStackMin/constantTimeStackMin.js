@@ -45,7 +45,7 @@ Stack.prototype.pop = function() {
 
 // return the number of items in the stack
 Stack.prototype.size = function() {
-  return counter;
+  return this.counter;
 }
 
 // return the minimum value in the stack
