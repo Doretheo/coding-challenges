@@ -53,6 +53,10 @@ var insertionSort = function(array) {
   // Your code goes here. Feel free to add helper functions if needed.
   var sorted = [];
 
+  if (array.length < 2) {
+    return array;
+  }
+
   for (var i = 0; i < array.length; i++) {
     // set the outer obj to equal each object in the array
     let outerObj = array[i];
