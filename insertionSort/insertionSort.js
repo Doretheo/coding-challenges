@@ -42,6 +42,10 @@
 var testingTransform = function(array) {
   var transform = [];
 
+  if (array.length < 2) {
+    return array;
+  }
+
   for (var i = 0; i < array.length; i++) {
     transform.push({value: array[i], i: i});
   }
