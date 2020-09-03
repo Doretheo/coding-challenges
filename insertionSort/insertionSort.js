@@ -35,9 +35,13 @@
 
 // This function is to help you test, and should not be incorporated in your solution.
 // It will transform an array of numbers into an array of valid objects.
+
+//input: array -> object that contains key = i, value = {value: num} -> object that contains value: num
+// {value: {value: num}, i: num}
+
 var testingTransform = function(array) {
   var transform = [];
-  
+
   for (var i = 0; i < array.length; i++) {
     transform.push({value: array[i], i: i});
   }
@@ -45,8 +49,28 @@ var testingTransform = function(array) {
   return transform;
 };
 
-var insertionSort = function(array
-) {
+var insertionSort = function(array) {
   // Your code goes here. Feel free to add helper functions if needed.
-  return array;
+  var sorted = [];
+
+  for (var i = 0; i < array.length; i++) {
+    // set the outer obj to equal each object in the array
+    let outerObj = array[i];
+    // set the inner obj to each value (key) object
+    let innerObj = outerObj.value;
+    // grab the value's property, which is a number, and push into a new object at that value index
+    let order = innerObj.value;
+    // console.log(outerObj, innerObj, order)
+
+    sorted[order] = innerObj;
+  }
+  // check to see if there are empty spaces
+  // filter all empty spaces from the result
+  var filtered = sorted.filter(function(object) {
+    return object !== undefined;
+  })
+  // return the new array of objects
+  return filtered;
 };
+// debugger;
+insertionSort(testingTransform([{value: 2}, {value: 1}, {value: 3}]))
