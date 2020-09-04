@@ -98,5 +98,33 @@
 
 
 var mergeSort = function(array) {
-  // Your code here.
+  let containerArrays = [];
+
+  array.forEach((element) => {
+    containerArrays.push([element])
+  });
+
+  var sort = function(multipleArrays) {
+    for (var i = 0; i < multipleArrays.length; i+=2) {
+      if (multipleArrays[i] === null || multipleArrays[i+1] === null) {
+        continue;
+      }
+      if (multipleArrays.length === 1) {
+        return multipleArrays;
+      }
+      multipleArrays[i].concat(multipleArrays[i+1])
+      console.log(multipleArrays)
+      if (multipleArrays[i][i] > multipleArrays[i][i+1]) {
+        multipleArrays[i].push(multipleArrays[i][i])
+        multipleArrays[i].shift()
+      }
+    }
+    return sort(multipleArrays);
+
+  }
+  sort(containerArrays)
 };
+
+var test = [4,7,4,3,9,1,2];
+
+mergeSort(test);
