@@ -33,7 +33,7 @@
 
 var shuffleDeck = function(deck) {
   // Your code here
-  for (var i = deck.length - 1; i > -1; i--) {
+  for (var i = deck.length - 1; i > 0; i--) {
     let randomNumber = Math.floor(Math.random() * deck.length - 1);
     let currentCard;
 
