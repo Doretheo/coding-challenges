@@ -44,39 +44,32 @@
 // ANSWER: time complexity =
 
 var bubbleSort = function(array) {
-  // since they don't ask to modify exisiting or create new array, I will create a new one
-  var sorted = [];
-  // check the constraints
-  if (array.length === 0) {
-    return [];
-  }
-  if (array.length === 1) {
-    return array;
-  }
-  // set a variable to the first element/index MAYBE
-//   let currentement = sorted[0];
-//   let lastElement = sorted[sorted.length - 1];
-  // use splice
-  // iterate over the array
-  sorted.push(array[0])
-  for (var i = 1; i < array.length; i++) {
-    let current = array[i];
-    let last = array[array.length - 1];
-    console.log(current, sorted, 'before');
-
-  // if the second indexed element is > the first
-  // if swapped, make sure to check the NEW second number to third
-
-    if (current < sorted[0]) {
-        sorted.unshift(current)
-    } else if (current >= sorted[i]) {
-        sorted.splice(i, 0, current);
-    } else if (current >= sorted[sorted.length - 1]) {
-        sorted.push(current);
+  // create a base case
+  let swapped = true;
+  // create a recursive function
+  var swapping = function(current, next, collection) {
+    if (array[current] > array[next]) {
+      let temp = array[current];
+      array[current] = array[next];
+      array[next] = temp;
     }
-    console.log(current, sorted, 'after');
+    return collection;
   }
-  return sorted;
+  // create base case, stop checking if the array is sorted
+  while (swapped === true) {
+    swapped = false;
+    // iterate through the array
+    for (var i = 0; i < array.length; i++) {
+      // check if the current index is greater than the next
+      if (array[i] > array[i+1]) {
+        // if true, change swap to true and call the recursive function
+        swapped = true;
+        swapping(i, i+1, array);
+      }
+    }
+  }
+  // if false, return the array
+  return array;
 };
 
-bubbleSort([1,4,5,6,7,2]);
+bubbleSort([1,4,5,6,7,2,4,63,7,26,2,6,4,6]);
