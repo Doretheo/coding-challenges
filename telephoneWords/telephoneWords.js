@@ -43,4 +43,39 @@ var phoneDigitsToLetters = {
 
 var telephoneWords = function(digitString) {
   // TODO: return every combination that can be spelled on a phone with these digits
+  // create a container to store the results
+  // when length of temp = len of digitString, add to the result
+  let digitWords = [];
+  // maybe create a temp array to store individual values
+  let tempValues = [];
+  // create a recursive function
+  var numberToWords = function(result, index) {
+    // exit the function when the length of the return value is equal to length of digitString
+    if (index === digitString.length) {
+      // if true, add the result into the results array
+      return digitWords.push(result.join(''));
+    }
+
+    for (var i = 0; i < phoneDigitsToLetters[digitString[index]].length; i++) {
+      // grab the first value at each number key
+      // push the value to temp array
+      tempValues.push(phoneDigitsToLetters[digitString[index]][i]);
+      // call recursive function on temp array to keep creating instances with the first letter
+      // calling it at this point will add two letters before next loop
+      // pass in temp array instead of results array to keep added to the digitWord
+      // increment index to move to the next letter in the object's key-value pair
+      numberToWords(tempValues, index + 1);
+      // the values keep concating with each other
+      // tempValues.splice(0,index);
+      // tempValues = [];
+      // grab remaining values start at index and continue added from there
+      tempValues.splice(index)
+    }
+  }
+  // call recursive function
+  // pass in empty array, and index at 0 to start off
+  // has to be zero in order to grab first letter
+  numberToWords([], 0)
+  // return results
+  return digitWords;
 };
