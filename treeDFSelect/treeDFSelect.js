@@ -50,7 +50,7 @@ Tree.prototype.DFSelect = function(filter) {
     // run the filter function on the node and check if it passes
     if (filter(node.value, depth)) {
       // if true, then push the node's value into the result
-      result.push(node.value)
+      res.push(node.value)
     }
     // check if the node has any children
     if (node.children) {
