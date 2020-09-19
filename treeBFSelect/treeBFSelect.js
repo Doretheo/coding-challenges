@@ -37,8 +37,27 @@ var Tree = function(value) {
 
 
 
+
 Tree.prototype.BFSelect = function(filter) {
   // return an array of values for which the function filter(value, depth) returns true
+  let result = []
+  // create a recursive function to pass in the remaining tree and current depth
+  var traverse = function(node, depth) {
+    if (node.children) {
+      depth++;
+    };
+
+    for (var i = 0; i < node.children.length; i++) {
+      if (filter(node.children[i].value, depth)) {
+        result.push(node.children[i].value);
+      };
+    };
+    for (var j = 0; j < node.children.length; j++) {
+        traverse(node.children[j], depth);
+    };
+  };
+  traverse(this, 0);
+  return result;
 };
 
 /**
