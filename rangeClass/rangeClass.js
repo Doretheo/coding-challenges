@@ -40,15 +40,42 @@
 
 
 var Range = function(start, end, step) {
+  // create references that prototypes can refer to
+  this.start = start;
+  this.end = end || null;
+  this.step = step || 1;
 };
 
 Range.prototype.size = function () {
+  let size = 0;
+  // (4, 12, 4) 12 % 4 = 3      (10, _, _) 10 % 1 = 10
+  this.end ? size = Math.round(this.end / this.step) : size = Math.round(this.start / this.step);
+  return size;
 };
 
 Range.prototype.each = function (callback) {
+  if (this.end !== null) {
+    // if 4 < 10, then step is a positive number and adding step will get us to the end
+    if (this.start > this.end) {
+      for (var i = this.start, i <= this.end; i+= this.step) {
+        callback(i);
+      }
+    } else {
+      // if 10 > 4, step is negative and adding a negative step will decrement the number
+      for (var i = this.start, i >= this.end; i += this.step) {
+        callback(i)
+      }
+    }
+  } else {
+    // no this.end means only a single number
+    callback(this.start)
+  }
 };
 
 Range.prototype.includes = function (val) {
+  return (
+    this.end ? this.start === val : this.start % val === 0;
+  )
 };
 
 var range = new Range(1);
