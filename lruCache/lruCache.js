@@ -31,18 +31,43 @@
  */
 
 var LRUCache = function (limit) {
+  this.limit = limit || 50;
+  this.caches = {};
+  this.size = 0;
+  for (const key in caches) {
+    if (caches.hasOwnProperty(key)) {
+      this.size++;
+    }
+  }
+  this.list = new List();
 };
 
 var LRUCacheItem = function (val, key) {
+  this.val = val || null;
+  this.key = key || null;
 };
 
 LRUCache.prototype.size = function () {
+  return this.size;
 };
 
 LRUCache.prototype.get = function (key) {
+  if (this.caches(key) === undefined) {
+    return null;
+  }
+  const cache = this.caches[key];
+  this.list.unshift(cache);
+  return cache.val;
 };
 
 LRUCache.prototype.set = function (key, val) {
+  const item = this.caches[key];
+  item.val = val;
+  this.list.moveToEnd(item);
+
+  if (this.size > this.limit) {
+    this.list.unshift()
+  }
 };
 
 
