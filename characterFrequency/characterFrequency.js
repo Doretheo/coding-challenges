@@ -37,5 +37,22 @@
 
 
 var characterFrequency = function(string) {
+  let words = string.split('');
+  let frequencies = [];
+  let letterCount = {};
+
+  for (let letter in words) {
+    if (letterCount[letter]) {
+      letterCount[letter]++;
+    } else {
+      letterCount[letter] = 1
+    }
+  };
+
+  frequencies.push(Object.entries(letterCount));
+
+  let result = frequencies.sort((a,b) => {
+    return a - b;
+  })
   return result;
 };
