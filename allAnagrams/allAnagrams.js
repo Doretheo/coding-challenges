@@ -14,36 +14,49 @@
 
  var allAnagrams = function(string) {
   // check for edge cases
-  if (typeof string === 'string') {
-    string = string.split('');
-  } else {
-    string = string.toString().split('');
+    debugger;
+    let anagrams = {};
+
+    var swapLetters = function(text, remainder) {
+      if (text.length === string.length) {
+        anagrams[text] = true;
+      }
+
+      for (let i = 0; i < remainder.length; i++) {
+        swapLetters(text + remainder[i], remainder.slice(0,i) + remainder.slice(i+1))
+      }
+    }
+    swapLetters('', string)
+    return Object.keys(anagrams);
   }
 
-  // add a container to hold all the anagrams
-  let anagrams = [];
-  anagrams.push(string.join(''))
-  // console.log(anagrams)
+   allAnagrams('abc');
 
-  // create a for loop to iterate through the string array
-  for (var i = 0; i < 100; i++) {
-     anagrams.push(mixingString(i, i+1, string));
+
+   // abc
+   // first for loop
+    // a + ('' + bc) (i=0) --> abc
+      // ab + c (i = 0, i = 0) --> abc
+      // ac + b (i = 0, i = 1) --> acb
+    // b + (a + c) (i=1) ---> bac
+      // ba + c (i = 0, i = 0) --> bac
+      // bc + a (i = 0, i = 1) --> bca
+    // c + (a + b) (i=2) ---> cab
+      // ca + b (i = 0, i = 0) --> cab
+      // cb + c (i = 0, i = 1) --> cbc
+
+var allAnagrams = (string) => {
+  let anagrams = {};
+
+  var findAnagram = (text, remainder) => {
+    if (text.length === string.length) {
+      anagrams[text] = true;
+    }
+
+    for (let i = 0; i < remainder.length; i++) {
+      findAnagram(text + remainder[i], remainder.slice(0,i) + remainder.slice(i))
+    }
   }
-
-  // return anagrams
-  return anagrams.filter(unique);
-};
-
-var unique = function(value, index, array) {
-  return array.indexOf(value) === index;
+  findAnagram('', string)
+  return Object.keys(anagrams);
 }
-
-var mixingString = function (current, next, array) {
-  let temp = array[current];
-  array[current] = array[next];
-  array[next] = temp;
-  return array.join('');
-}
-
-// debugger;
-allAnagrams('abc');

@@ -30,27 +30,55 @@
 // rockPaperScissors(3) = 3^3 = 27
 // rockPaperScissors(4) = 3^4 = 81
 
-var rockPaperScissors = function (num) {
+// var rockPaperScissors = function (num) {
 
-  var instances = ['R', 'P', 'S'];
-  var allInstances = [];
+//   var instances = ['R', 'P', 'S'];
+//   var allInstances = [];
 
+//   if (num === 0) {
+//     return allInstances;
+//   }
+
+//   if (num === 1) {
+//     return instances;
+//   }
+
+//   var otherInstances = rockPaperScissors(num - 1);
+
+//   for (var i = 0; i < instances.length; i++) {
+//     var firstChar = instances[i];
+//     for (var j = 0; j < otherInstances.length; j++) {
+//       var secondChar = otherInstances[j];
+//       allInstances.push(firstChar + secondChar);
+//     }
+//   }
+//   return allInstances;
+// };
+
+var rockPaperScissors = (num) => {
   if (num === 0) {
-    return allInstances;
+    return [];
   }
+  let choices = ['R', 'P', 'S'];
+  let allInstances = [];
+  let perRound = [];
 
-  if (num === 1) {
-    return instances;
-  }
-
-  var otherInstances = rockPaperScissors(num - 1);
-
-  for (var i = 0; i < instances.length; i++) {
-    var firstChar = instances[i];
-    for (var j = 0; j < otherInstances.length; j++) {
-      var secondChar = otherInstances[j];
-      allInstances.push(firstChar + secondChar);
+  var generateRound = (series) => {
+    if (series.length === num) {
+      perRound.push(series);
+      if (perRound.length === 3) {
+        allInstances.push(perRound)
+        perRound = [];
+      }
+      return
     }
-  }
+
+    choices.forEach(round => {
+      generateRound(round + series)
+    })
+  };
+
+  generateRound('');
   return allInstances;
-};
+}
+rockPaperScissors(2)
