@@ -56,29 +56,20 @@
 // };
 
 var rockPaperScissors = (num) => {
-  if (num === 0) {
-    return [];
-  }
+  let res = [];
   let choices = ['R', 'P', 'S'];
-  let allInstances = [];
-  let perRound = [];
 
-  var generateRound = (series) => {
-    if (series.length === num) {
-      perRound.push(series);
-      if (perRound.length === 3) {
-        allInstances.push(perRound)
-        perRound = [];
-      }
-      return
+  var generateRound = (round = '') => {
+    if (round.length === num) {
+      return res.push(round);
     }
 
-    choices.forEach(round => {
-      generateRound(round + series)
-    })
-  };
-
-  generateRound('');
-  return allInstances;
+    for (let i = 0; i < choices.length; i++) {
+      generateRound(round + choices[i])
+    }
+  }
+  generateRound();
+  return res;
 }
-rockPaperScissors(2)
+
+rockPaperScissors(2);
