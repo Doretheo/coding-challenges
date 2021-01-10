@@ -27,7 +27,7 @@ var bind = function() {
   let prevArgs = Array.prototype.slice.call(arguments, 2);
 
   return () => {
-    let args = Array.prototype.slice.call(arguments)
+    let args = Array.prototype.slice.call(arguments);
     args = prevArgs.concat(args);
     return func.apply(args)
   }
@@ -62,7 +62,6 @@ Function.prototype.bind = function() {
   // TODO: Your code here
   let prevArgs = Array.prototype.slice.call(arguments, 1);
   let func = this;
-
   return () => {
     let args = Array.prototype.slice.call(arguments);
     args = prevArgs.concat(args);
