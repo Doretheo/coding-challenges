@@ -60,6 +60,29 @@ Tree.prototype.BFSelect = function(filter) {
   return result;
 };
 
+Tree.prototype.BFSelect = (filter) => {
+  let res = {};
+  let node = this;
+
+  var search = (node, depth) => {
+    if (node === null) {
+      return;
+    }
+
+    if (node.children) {
+      depth++;
+    }
+
+    if (fitler(node)) {
+      res[node.val] = true;
+    }
+
+
+  }
+
+}
+
+
 /**
  * You shouldn't need to change anything below here, but feel free to look.
   */
