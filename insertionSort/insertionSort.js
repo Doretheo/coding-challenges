@@ -82,3 +82,19 @@ var insertionSort = function(array) {
 };
 // debugger;
 insertionSort(testingTransform([{value: 2}, {value: 1}, {value: 3}]))
+
+var insertionSort = (array) => {
+
+  for (let i = 0; i < array.length; i++) {
+    if (array[i + 1] < array[i]) {
+      for (let j = 0; j <= i; j++) {
+        let temp = array[j];
+        if (temp <= next) {
+          array[j] = array[i + 1];
+          array[i + 1] = temp;
+        }
+      }
+    }
+  }
+  return array;
+}
