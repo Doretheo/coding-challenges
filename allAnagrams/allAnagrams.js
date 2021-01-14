@@ -48,15 +48,15 @@
 var allAnagrams = (string) => {
   let anagrams = {};
 
-  var findAnagram = (text, remainder) => {
-    if (text.length === string.length) {
-      anagrams[text] = true;
-    }
+  var generate = (str, choices) => {
+    if (str.length === string.length) {
+      anagrams[str] = true;
+    };
 
-    for (let i = 0; i < remainder.length; i++) {
-      findAnagram(text + remainder[i], remainder.slice(0,i) + remainder.slice(i))
+    for (let i = 0; i < choices.length; i++) {
+      allAnagrams(str + choices[i], choices.slice(0,i) + choices.slice(i + 1));
     }
   }
-  findAnagram('', string)
+  generate('', string);
   return Object.keys(anagrams);
 }
