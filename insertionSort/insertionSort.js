@@ -31,7 +31,8 @@
 
 // Example usage:
 // insertionSort([{value: 2}, {value: 1}, {value: 3}]);
-// yields [{value: 1}, {value: 2}, {value: 3}]
+// yields [{5: 1}, {5: 2}, {4: 3}]
+
 
 // This function is to help you test, and should not be incorporated in your solution.
 // It will transform an array of numbers into an array of valid objects.
