@@ -60,3 +60,20 @@ var allAnagrams = (string) => {
   generate('', string);
   return Object.keys(anagrams);
 }
+
+var allAnagrams = (string) => {
+  let res = {};
+
+  var permutate = (building, leftover) => {
+    if (building.length === string.length) {
+      return res[building] = true;
+    };
+
+    for (let i = 0; i < leftover.length; i++) {
+      permutate(building + leftover[i], leftover.slice(0,i) + leftover.slice(i + 1))
+    }
+  }
+
+  permutate('', string);
+  return Object.keys(res);
+}
