@@ -24,49 +24,29 @@ makeChange(1) === 1
 makeChange(2) === 2
 */
 
-var makeChange = function(total) {
-  // create an object or array to hold the coin values
-  // let coins = {
-  //   '1p': 1,
-  //   '2p': 2,
-  //   '5p': 5,
-  //   '10p': 10,
-  //   '20p': 20,
-  //   '50p': 50,
-  //   '1': 100,
-  //   '2': 200
-  // }
-  let coins = [1, 2, 3, 4, 5, 10, 20, 50, 100, 200]
-  // create an array or counter to count the number of instances
-  // let instances = [];
-  let instances = 0
-  let value = total;
+var coinSums = (total) => {
+  let values = [1,2,5,10,20,50,100,200];
+  let res = []
+  let counter = 0;
+  var makeChange = (index, remainder) => {
+    let iteration = []
+    let coin = values[index];
 
-  // create a recursive function
-  var calculate = function(remainder, index) {
-    // create a variable to track the current coin
-    let coin = coins[index]; // 200 -> 100 -> 50 -> 20
-    // base exit case
-    // if the value is equal to 0, increment counter or add to instances
-    if (value === 0) {
-      // if true, increment/add
-      return instances++;
+    if (index === 0) {
+      remainder % coin === 0 && counter++;
+      return res.push(iteration);
     }
-    // iterate through the array starting at the end
-    // starting at the end will eliminate the early choices
-    for (var i = coins.length - 1; i > 0; i--) {
-      // subtract the total value from the coin
-      // let coin = coins[i];
-      if (coin > value) {continue};
-      value -= coin;
-      // call the recursive function with what inputs
-      // in order to keep the current value, pass the value (total)
-      // also pass the current coin we are adding to
-      // if I decrement the coin's length and pass that as an index
-      // I can linearly travel backwards up the array at each index
-      return calculate(value, i)
+
+    while (remainder >= 0) {
+      makeChange(index - 1, remainder);
+      iteration.push(coin);
+      remainder -= coin;
     }
   }
-  calculate(total, coins.length - 1)
-  return instances;
-};
+  makeChange(values.length-1, total);
+
+  return res;
+}
+
+coinSums(10)
+
