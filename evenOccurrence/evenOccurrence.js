@@ -37,3 +37,24 @@ var evenOccurrence = (arr)  => {
   };
   return null;
 };
+
+var evenOccurrence = (arr) => {
+  let seen = {};
+
+  for (let i = 0; i < arr.length; i++) {
+    if (!seen[arr[i]]) {
+      seen[arr[i]] = 1;
+    } else {
+      seen[arr[i]]++;
+    }
+  }
+
+  for (let val in seen) {
+    if (seen[val] % 2 === 0) {
+      return seen[val];
+    }
+  }
+}
+
+var onlyEven = evenOccurrence([1, 7, 2, 4, 5, 6, 8, 9, 6, 4]);
+console.log(onlyEven);

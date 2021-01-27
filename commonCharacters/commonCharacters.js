@@ -35,5 +35,25 @@ var commonCharacters = function(string1, string2) {
   return common.join('');
 };
 
-// console.log(commonCharacters('awgeagfers', 'awgrgsoad'));
-// console.log(commonCharacters('1581932847', '32418927512'));
+var commonCharacters = (a, b) => {
+  let chars = {};
+  let res = "";
+
+  for (let i = 0; i < a.length; i++) {
+    if (!chars[a[i]]) {
+      chars[a[i]] = 1
+    }
+  }
+
+  for (let i = 0; i < b.length; i++) {
+    if (chars[b[i]]) {
+      res += b[i];
+      delete chars[b[i]];
+    }
+  }
+
+  return res;
+}
+
+console.log(commonCharacters('awgeagfers', 'awgrgsoad'));
+console.log(commonCharacters('1581932847', '32418927512'));
