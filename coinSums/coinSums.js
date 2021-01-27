@@ -48,5 +48,27 @@ var coinSums = (total) => {
   return res;
 }
 
+var coinSums = (value) => {
+  let count = 0;
+  let values = [1,2,5,10,20,50,100,200];
+
+  if (!value) {
+    return 0;
+  }
+
+  var permutate = (change, index) => {
+    if (index === 0) {
+      return change % values[index] === 0 && count++;
+    }
+
+    while (change >= 0) {
+      permutate(change, index - 1)
+      change -= values[index]
+    }
+  }
+  permutate(value, values.length - 1);
+  return count;
+}
+
 coinSums(10)
 
