@@ -132,3 +132,62 @@
 //     throw new Error('That node is not an immediate child of this tree');
 //   }
 // };
+
+var Tree = function(value) {
+  this.value = value;
+  this.children = [];
+}
+
+Tree.prototype.addChild = function(child) {
+  if (!child || !(child instanceof Tree)) {
+    child = new Tree(child);
+  }
+
+  if (!Tree.isDescendant(child)) {
+    this.children.push(child);
+  } else {
+    throw new error ('Child is already a child of this tree');
+  }
+
+  return child;
+}
+
+Tree.prototype.isDescendant = function(child) {
+  if (this.children.indexOf(child) !== -1) {
+    return true;
+  } else {
+    for (let i = 0; i < this.children.length; i++) {
+      if (this.children[i].isDescendant(child)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+Tree.prototype.removeChild = function(child) {
+  let removal = this.children.indexOf(child);
+  if (removal !== -1) {
+    this.children.splice(index, 1);
+  } else {
+    throw new error ('Tree does not contain the child');
+  }
+}
+
+Tree.prototype.DFSelect = function(filter) {
+  let res = {};
+
+  function search = (node, depth) {
+    if (filter(node.value, depth)) {
+      res[node] = true;
+    }
+
+    if (node.children) {
+      for (let i = 0; i < node.children.length; i++) {
+        search(node.children[i], i)
+      }
+    }
+  }
+  search(this, 0);
+  return Object.keys(res);
+}
