@@ -49,25 +49,21 @@ var coinSums = (total) => {
 }
 
 var coinSums = (value) => {
-  let count = 0;
   let values = [1,2,5,10,20,50,100,200];
+  let counter = 0;
 
-  if (!value) {
-    return 0;
-  }
-
-  var permutate = (change, index) => {
+  var calculateChange = (remainder, index) => {
     if (index === 0) {
-      return change % values[index] === 0 && count++;
+      return remainder % values[index] === 0 && counter++;
     }
 
-    while (change >= 0) {
-      permutate(change, index - 1)
-      change -= values[index]
+    while (remainder >= 0) {
+      calculateChange(remainder, index - 1)
+      remainder -= values[index];
     }
   }
-  permutate(value, values.length - 1);
-  return count;
+  calculateChange(value, values.length - 1)
+  return counter;
 }
 
 coinSums(10)

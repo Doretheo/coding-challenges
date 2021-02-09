@@ -38,6 +38,22 @@ var powerSet = function(str) {
   return Object.keys(permutations)
 };
 
+var powerSet = (string) => {
+  let res = {};
+  
+  var permutate = (str) => {
+    if (!res[str]) {
+      res[str] = true;
+    }
+
+    for (let i = 0; i < str.length; i++) {
+      permutate(str.slice(0, i) + str.slice(i + 1))
+    }
+  }
+  permutate(string);
+  return Object.keys(res);
+}
+
 powerSet('abc');
 
 
